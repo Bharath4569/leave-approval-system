@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Manager Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="dashboard">
+
+<h2>Manager Dashboard</h2>
+
+<h3>All Leave Requests</h3>
+
+<table>
+<tr>
+<th>Employee</th>
+<th>From</th>
+<th>To</th>
+<th>Reason</th>
+<th>Status</th>
+<th>Month</th>
+<th>Action</th>
+</tr>
+
+{% for leave in leaves %}
+<tr>
+<td>{{ leave[1] }}</td>
+<td>{{ leave[2] }}</td>
+<td>{{ leave[3] }}</td>
+<td>{{ leave[4] }}</td>
+<td>{{ leave[5] }}</td>
+<td>{{ leave[6] }}</td>
+<td>
+    <a class="approve-btn" href="/update/{{ leave[0] }}/Approved">Approve</a>
+    <a class="reject-btn" href="/update/{{ leave[0] }}/Rejected">Reject</a>
+</td>
+</tr>
+{% endfor %}
+</table>
+<div class="logout-container">
+    <a class="logout-btn" href="/logout">Logout</a>
+</div>
+
+</div>
+
+</body>
+</html>

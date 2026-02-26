@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Employee Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="dashboard">
+
+<h2>Employee Dashboard</h2>
+
+<h3>Apply Leave</h3>
+<form method="POST">
+<input type="date" name="from" required>
+<input type="date" name="to" required>
+<input type="text" name="reason" placeholder="Reason" required>
+<button type="submit">Apply Leave</button>
+</form>
+
+<h3>Your Leave History</h3>
+<table>
+<tr>
+<th>From</th>
+<th>To</th>
+<th>Reason</th>
+<th>Status</th>
+<th>Month</th>
+</tr>
+
+{% for leave in leaves %}
+<tr>
+<td>{{ leave[2] }}</td>
+<td>{{ leave[3] }}</td>
+<td>{{ leave[4] }}</td>
+
+<td class="
+{% if leave[5] == 'Approved' %}status-approved
+{% elif leave[5] == 'Rejected' %}status-rejected
+{% else %}status-pending
+{% endif %}
+">
+{{ leave[5] }}
+</td>
+
+<td>{{ leave[6] }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<div class="logout-container">
+<a class="logout-btn" href="/logout">Logout</a>
+</div>
+
+</div>
+
+</body>
+</html>
